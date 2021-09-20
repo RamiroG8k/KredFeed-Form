@@ -6,9 +6,7 @@ const ModeSwitcher = () => {
     const [enabled, setEnabled] = useState<boolean>(false);
     const htmlClasses: any = document.getElementsByTagName('html')[0].classList;
 
-    const toggleMode = () => {
-        console.log(htmlClasses);
-        
+    const toggleMode = () => {        
         setEnabled(!enabled);
         htmlClasses.contains('scheme-dark') ?
             htmlClasses.remove('scheme-dark') :
