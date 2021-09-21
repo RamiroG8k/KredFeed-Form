@@ -74,7 +74,7 @@ const FirstStep = (props: any) => {
                 <div className="flex flex-col relative">
                     <label htmlFor="rfc" className="ml-2 mb-1">RFC</label>
                     {/* TODO Evaluar correctamente */}
-                    <input id="rfc" {...register("rfc", { required: true, maxLength: 13, minLength: 10 })} pattern="[a-zA-Z0-9]" type="text" autoComplete="off"
+                    <input id="rfc" {...register("rfc", { required: true, maxLength: 13, minLength: 10 })} type="text" autoComplete="off"
                         className={`${errors.rfc && 'border-2 border-red-400 dark:border-red-600'} input uppercase bg-yellow-500 bg-opacity-20 dark:bg-gray-600`} />
                     {errors.rfc && <InputWarning text="No debe ser mayor a 13 Caracteres" />}
                 </div>

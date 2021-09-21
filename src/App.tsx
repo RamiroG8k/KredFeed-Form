@@ -5,19 +5,21 @@ import { useForm } from 'react-hook-form';
 
 function App() {
     const [step, setStep] = useState(1);
+    const [formData, setFormData] = useState<any>({});
     const { register, control, handleSubmit, formState, formState: { errors } } = useForm();
 
     const onSubmit = (data: any) => {
-        console.log(data);
-        // console.log(data.fechaConstitucion.toISOString().split('T')[0]);
-    };
-
-    const stepHandler = (backwards?: boolean) => {
-        console.log(Object.keys(errors).length);
-        
-        if (formState.isValid) {
-            backwards ? setStep(step - 1) : setStep(step + 1);
+        if (step < 4) {
+            
+            setStep(step + 1);
+            setFormData({...formData, ...data});
         }
+        console.log(formData);
+    };
+    
+    const stepHandler = (backwards?: boolean) => {
+        backwards ? setStep(step - 1) : setStep(step + 1);
+        console.log(formData);
     };
 
     const stepRenderer = () => {
@@ -26,7 +28,7 @@ function App() {
                 return <FirstStep register={register} errors={errors} control={control} />;
 
             case 2:
-                return <SecondStep register={register} errors={errors} control={control} />;
+                return <SecondStep comprobante={formData?.comprobanteDomicilio.name} register={register} errors={errors} control={control} />;
 
             case 3:
                 return <ThirdStep register={register} errors={errors} control={control} />;
@@ -64,7 +66,7 @@ function App() {
                         <p className="font-bold text-lg text-white dark:text-gray-400">Anterior</p>
                     </button>}
 
-                    <button form="form" type="submit" onClick={() => stepHandler()}
+                    <button form="form" type="submit"
                         className="sm:w-1/2 self-center px-4 py-2 bg-yellow-400 dark:bg-gray-900 btn btn-animated hover:bg-yellow-500 active:bg-yellow-200">
                         <p className="font-bold text-lg text-white dark:text-gray-400">{step < 4 ? `Siguiente paso ${step}/4` : 'Submit'}</p>
                     </button>

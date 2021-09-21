@@ -5,7 +5,7 @@ import { Controller } from 'react-hook-form';
 
 const SecondStep = (props: any) => {
     const [file, setFile] = useState<any>();
-    const { register, control, errors } = props;
+    const { register, control, errors, comprobante } = props;
     // console.log(Object.values(errors).length);
 
     const fileHandler = (multiple: boolean, input: any) => {
@@ -83,7 +83,7 @@ const SecondStep = (props: any) => {
             <div className="flex flex-col relative col-span-2 sm:col-span-1">
                 <label htmlFor="comprobanteDomicilio" className="ml-2 mb-1">Comprobante domicilio</label>
                 <DropzoneField name="comprobanteDomicilio" />
-                {file && <p className="ml-6 mt-2 text-sm list-item">{file}</p>}
+                {(file || comprobante) && <p className="ml-6 mt-2 text-sm list-item">{file || comprobante}</p>}
                 {errors.comprobanteDomicilio && <InputWarning />}
             </div>
             <div className="flex flex-col relative col-span-2 sm:col-span-1">
