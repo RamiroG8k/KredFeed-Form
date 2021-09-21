@@ -56,25 +56,25 @@ const SecondStep = (props: any) => {
                     className={`${errors.colonia && 'border-2 border-red-400 dark:border-red-600'} input bg-yellow-500 bg-opacity-20 dark:bg-gray-600`} />
                 {errors.colonia && <InputWarning />}
             </div>
-            <div className="flex flex-col relative">
+            <div className="flex flex-col relative col-span-2 sm:col-span-1">
                 <label htmlFor="municipio" className="ml-2 mb-1">Delegacion o Municipio</label>
                 <input id="municipio" {...register("municipio", { required: true })} type="text" autoComplete="off"
                     className={`${errors.municipio && 'border-2 border-red-400 dark:border-red-600'} input bg-yellow-500 bg-opacity-20 dark:bg-gray-600`} />
                 {errors.municipio && <InputWarning />}
             </div>
-            <div className="flex flex-col relative">
+            <div className="flex flex-col relative col-span-2 sm:col-span-1">
                 <label htmlFor="ciudad" className="ml-2 mb-1">Ciudad o Poblacion</label>
                 <input id="ciudad" {...register("ciudad", { required: true })} type="text" autoComplete="off"
                     className={`${errors.ciudad && 'border-2 border-red-400 dark:border-red-600'} input bg-yellow-500 bg-opacity-20 dark:bg-gray-600`} />
                 {errors.ciudad && <InputWarning />}
             </div>
-            <div className="flex flex-col relative">
+            <div className="flex flex-col relative col-span-2 sm:col-span-1">
                 <label htmlFor="estado" className="ml-2 mb-1">Entidad federativa o Estado</label>
                 <input id="estado" {...register("estado", { required: true })} type="text" autoComplete="off"
                     className={`${errors.estado && 'border-2 border-red-400 dark:border-red-600'} input bg-yellow-500 bg-opacity-20 dark:bg-gray-600`} />
                 {errors.estado && <InputWarning />}
             </div>
-            <div className="flex flex-col relative">
+            <div className="flex flex-col relative col-span-2 sm:col-span-1">
                 <label htmlFor="pais" className="ml-2 mb-1">Pais</label>
                 <input id="pais" {...register("pais", { required: true })} type="text" autoComplete="off"
                     className={`${errors.pais && 'border-2 border-red-400 dark:border-red-600'} input bg-yellow-500 bg-opacity-20 dark:bg-gray-600`} />

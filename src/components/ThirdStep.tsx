@@ -28,19 +28,19 @@ const FirstStep = (props: any) => {
     }
     return (
         <div className="grid lg:grid-cols-2 gap-2 lg:gap-4">
-            <div className="flex flex-col relative">
+            <div className="flex flex-col relative col-span-2 sm:col-span-1">
                 <label htmlFor="nombreRepresentante" className="ml-2 mb-1">Nombre</label>
                 <input id="nombreRepresentante" {...register("nombreRepresentante", { required: true })} type="text" autoComplete="off"
                     className={`${errors.nombreRepresentante && 'border-2 border-red-400 dark:border-red-600'} input bg-yellow-500 bg-opacity-20 dark:bg-gray-600`} />
                 {errors.nombreRepresentante && <InputWarning />}
             </div>
-            <div className="flex flex-col relative">
+            <div className="flex flex-col relative col-span-2 sm:col-span-1">
                 <label htmlFor="genero" className="ml-2 mb-1">Genero</label>
                 <input id="genero" {...register("genero", { required: true })} type="text" autoComplete="off"
                     className={`${errors.genero && 'border-2 border-red-400 dark:border-red-600'} input bg-yellow-500 bg-opacity-20 dark:bg-gray-600`} />
                 {errors.genero && <InputWarning />}
             </div>
-            <div className="flex flex-col relative">
+            <div className="flex flex-col relative col-span-2 sm:col-span-1">
                 <label htmlFor="fechaNacimiento" className="ml-2 mb-1">Fecha de nacimiento</label>
                 <Controller control={control} name="fechaNacimiento" defaultValue={null} rules={{ required: true }}
                     render={({ field: { onChange, onBlur, value } }) => (
@@ -49,55 +49,55 @@ const FirstStep = (props: any) => {
                             className={`${errors.fechaNacimiento && 'border-2 border-red-400 dark:border-red-600'} input bg-yellow-500 bg-opacity-20 dark:bg-gray-600`} />)} />
                 {errors.fechaNacimiento && <InputWarning />}
             </div>
-            <div className="flex flex-col relative">
+            <div className="flex flex-col relative col-span-2 sm:col-span-1">
                 <label htmlFor="estadoNacimiento" className="ml-2 mb-1">Entidad federativa de nacimiento</label>
                 <input id="estadoNacimiento" {...register("estadoNacimiento", { required: true })} type="text" autoComplete="off"
                     className={`${errors.estadoNacimiento && 'border-2 border-red-400 dark:border-red-600'} input bg-yellow-500 bg-opacity-20 dark:bg-gray-600`} />
                 {errors.estadoNacimiento && <InputWarning />}
             </div>
-            <div className="flex flex-col relative">
+            <div className="flex flex-col relative col-span-2 sm:col-span-1">
                 <label htmlFor="paisNacimiento" className="ml-2 mb-1">Pais de nacimiendo</label>
                 <input id="paisNacimiento" {...register("paisNacimiento", { required: true })} type="text" autoComplete="off"
                     className={`${errors.paisNacimiento && 'border-2 border-red-400 dark:border-red-600'} input bg-yellow-500 bg-opacity-20 dark:bg-gray-600`} />
                 {errors.paisNacimiento && <InputWarning />}
             </div>
-            <div className="flex flex-col relative">
+            <div className="flex flex-col relative col-span-2 sm:col-span-1">
                 <label htmlFor="nacionalidad" className="ml-2 mb-1">Nacionalidad</label>
                 <input id="nacionalidad" {...register("nacionalidad", { required: true })} type="text" autoComplete="off"
                     className={`${errors.nacionalidad && 'border-2 border-red-400 dark:border-red-600'} input bg-yellow-500 bg-opacity-20 dark:bg-gray-600`} />
                 {errors.nacionalidad && <InputWarning />}
             </div>
-            <div className="flex flex-col relative">
+            <div className="flex flex-col relative col-span-2 sm:col-span-1">
                 <label htmlFor="curp" className="ml-2 mb-1">CURP</label>
                 <input id="curp" {...register("curp", { required: true, maxLength: 13 })} type="text" autoComplete="off"
-                    className={`${errors.curp && 'border-2 border-red-400 dark:border-red-600'} input bg-yellow-500 bg-opacity-20 dark:bg-gray-600`} />
+                    className={`${errors.curp && 'border-2 border-red-400 dark:border-red-600'} input uppercase bg-yellow-500 bg-opacity-20 dark:bg-gray-600`} />
                 {errors.curp && <InputWarning text="No debe ser mayor a 13 Caracteres" />}
             </div>
-            <div className="flex flex-col relative">
+            <div className="flex flex-col relative col-span-2 sm:col-span-1">
                 <label htmlFor="rfc" className="ml-2 mb-1">RFC</label>
                 <input id="rfc" {...register("rfc", { required: true, maxLength: 13 })} type="text" autoComplete="off"
-                    className={`${errors.rfc && 'border-2 border-red-400 dark:border-red-600'} input bg-yellow-500 bg-opacity-20 dark:bg-gray-600`} />
+                    className={`${errors.rfc && 'border-2 border-red-400 dark:border-red-600'} input uppercase bg-yellow-500 bg-opacity-20 dark:bg-gray-600`} />
                 {errors.rfc && <InputWarning text="No debe ser mayor a 13 Caracteres" />}
             </div>
-            <div className="flex flex-col relative">
+            <div className="flex flex-col relative col-span-2 sm:col-span-1">
                 <label htmlFor="domicilio" className="ml-2 mb-1">Domicilio particular</label>
                 <input id="domicilio" {...register("domicilio", { required: true })} type="text" autoComplete="off"
                     className={`${errors.domicilio && 'border-2 border-red-400 dark:border-red-600'} input bg-yellow-500 bg-opacity-20 dark:bg-gray-600`} />
                 {errors.domicilio && <InputWarning />}
             </div>
-            <div className="flex flex-col relative">
+            <div className="flex flex-col relative col-span-2 sm:col-span-1">
                 <label htmlFor="estadoCivil" className="ml-2 mb-1">Estado civil</label>
                 <input id="estadoCivil" {...register("estadoCivil", { required: true })} type="text" autoComplete="off"
                     className={`${errors.estadoCivil && 'border-2 border-red-400 dark:border-red-600'} input bg-yellow-500 bg-opacity-20 dark:bg-gray-600`} />
                 {errors.estadoCivil && <InputWarning />}
             </div>
-            <div className="flex flex-col relative">
+            <div className="flex flex-col relative col-span-2 sm:col-span-1">
                 <label htmlFor="email" className="ml-2 mb-1">Correo electronico</label>
                 <input id="email" {...register("email", { required: true })} type="text" autoComplete="off"
                     className={`${errors.email && 'border-2 border-red-400 dark:border-red-600'} input bg-yellow-500 bg-opacity-20 dark:bg-gray-600`} />
                 {errors.email && <InputWarning />}
             </div>
-            <div className="flex flex-col relative">
+            <div className="flex flex-col relative col-span-2 sm:col-span-1">
                 <label htmlFor="numero" className="ml-2 mb-1">Telefono</label>
                 <input id="numero" {...register("numero", { required: true })} type="text" autoComplete="off"
                     className={`${errors.numero && 'border-2 border-red-400 dark:border-red-600'} input bg-yellow-500 bg-opacity-20 dark:bg-gray-600`} />

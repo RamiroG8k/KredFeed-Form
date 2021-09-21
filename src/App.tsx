@@ -5,14 +5,19 @@ import { useForm } from 'react-hook-form';
 
 function App() {
     const [step, setStep] = useState(1);
-    const { register, control, handleSubmit, formState: { errors } } = useForm();
+    const { register, control, handleSubmit, formState, formState: { errors } } = useForm();
 
     const onSubmit = (data: any) => {
-        console.log(data.fechaConstitucion.toISOString().split('T')[0]);
+        console.log(data);
+        // console.log(data.fechaConstitucion.toISOString().split('T')[0]);
     };
 
     const stepHandler = (backwards?: boolean) => {
-        backwards ? setStep(step - 1) : setStep(step + 1);
+        console.log(Object.keys(errors).length);
+        
+        if (formState.isValid) {
+            backwards ? setStep(step - 1) : setStep(step + 1);
+        }
     };
 
     const stepRenderer = () => {
@@ -41,20 +46,21 @@ function App() {
                     <ModeSwitcher />
                 </div>
             </div>
-            <div className="flex flex-col w-full sm:w-2/3 p-6">
-                <h1 className="text-4xl font-semibold text-center">
+            {/* <div className="z-10 absolute top-0 bg-yellow-500 bg-opacity-90 dark:bg-gray-800 w-full sm:w-1/2 sm:rounded-b-4xl p-4 sm:p-2">
+                <h1 className="text-4xl font-semibold text-center text-white">
                     Formulario KredFeed
                 </h1>
+            </div> */}
+            <div className="flex flex-col w-full sm:w-2/3 p-6 overflow-y-auto h-full justify-center">
                 <form id="form" onSubmit={handleSubmit(onSubmit)} className="my-6">
                     {stepRenderer()}
-                    {/* <FirstStep register={register} errors={errors} control={control} /> */}
-                    {/* <SecondStep register={register} errors={errors} control={control}/>
-                    <ThirdStep register={register} errors={errors} control={control}/>
-                    <FourthStep register={register} errors={errors} control={control}/> */}
                 </form>
+                {(!formState.isValid && Object.keys(errors).length > 0) && <p className="ml-2 mb-4 text-xs font-semibold text-red-500">
+                    Para pasar al siguiente paso es necesario llenar los campos indicados
+                </p>}
                 <div className={`flex ${step > 1 ? 'justify-between gap-5' : 'justify-end'}`}>
                     {step > 1 && <button onClick={() => stepHandler(true)}
-                        className="sm:w-1/4 self-center px-4 py-2 bg-gray-200 dark:bg-gray-800 dark:bg-opacity-80 btn btn-animated hover:bg-gray-300">
+                        className="sm:w-1/4 self-center px-4 py-2 bg-gray-300 dark:bg-gray-800 dark:bg-opacity-80 btn hover:bg-gray-400 transition">
                         <p className="font-bold text-lg text-white dark:text-gray-400">Anterior</p>
                     </button>}
 
