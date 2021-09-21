@@ -20,7 +20,7 @@ code {
 @layer components {
   .input {
     @apply py-2 px-4 transition focus:outline-none focus:ring focus:ring-offset-2
-      ring-yellow-500 w-full rounded-xl;
+      ring-yellow-500 dark:ring-offset-gray-700 w-full rounded-xl;
   }
   .btn {
     @apply w-full sm:w-auto tracking-wider font-semibold text-sm sm:text-base 
