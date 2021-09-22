@@ -1,12 +1,15 @@
 import { Address, Dropzone, InputWarning } from 'components/shared';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import 'react-datepicker/dist/react-datepicker.css';
 import { Controller } from 'react-hook-form';
 
 const SecondStep = (props: any) => {
     const [file, setFile] = useState<any>();
-    const { register, control, errors, comprobante } = props;
+    const { register, control, errors, data, unregister } = props;
     // console.log(Object.values(errors).length);
+    useEffect(() => {
+        unregister();
+    }, [unregister]);
 
     const fileHandler = (multiple: boolean, input: any) => {
         setFile(input.files[0].name);
@@ -17,7 +20,7 @@ const SecondStep = (props: any) => {
         const { name, multiple = false, ...rest } = props;
 
         return (
-            <Controller name={name} control={control} defaultValue={null} rules={{ required: true }}
+            <Controller name={name} control={control} defaultValue={data?.comprobanteDomicilio} rules={{ required: true }}
                 render={({ field: { onChange } }) => (
                     <Dropzone multiple={multiple} {...rest}
                         onChange={(e: any) => onChange(fileHandler(multiple, e.target))} />
@@ -36,22 +39,22 @@ const SecondStep = (props: any) => {
             </div>
 
             <div className="grid lg:grid-cols-2 gap-2 lg:gap-4">
-                <Address register={register} control={control} errors={errors} />
+                <Address data={data} register={register} control={control} errors={errors} />
                 <div className="flex flex-col relative col-span-2 sm:col-span-1">
                     <label htmlFor="comprobanteDomicilio" className="ml-2 mb-1">Comprobante domicilio</label>
                     <DropzoneField name="comprobanteDomicilio" />
-                    {(file || comprobante) && <p className="ml-6 mt-2 text-sm list-item">{file || comprobante.path}</p>}
+                    {(file || data?.comprobanteDomicilio) && <p className="ml-6 mt-2 text-sm list-item">{file || data?.comprobanteDomicilio.name}</p>}
                     {errors.comprobanteDomicilio && <InputWarning />}
                 </div>
                 <div className="flex flex-col relative col-span-2 sm:col-span-1">
                     <label htmlFor="telefono" className="ml-2 mb-1">Numero telefonico</label>
-                    <input id="telefono" {...register("telefono", { required: true })} type="text" autoComplete="off"
+                    <input id="telefono" {...register("telefono", { required: true })} type="text" autoComplete="off" defaultValue={data?.telefono}
                         className={`${errors.telefono && 'border-2 border-red-400 dark:border-red-600'} input bg-yellow-500 bg-opacity-20 dark:bg-gray-600`} />
                     {errors.telefono && <InputWarning />}
                 </div>
                 <div className="flex flex-col col-span-2 relative">
                     <label htmlFor="email" className="ml-2 mb-1">Correo electronico</label>
-                    <input id="email" {...register("email", { required: true })} type="email" autoComplete="off"
+                    <input id="email" {...register("email", { required: true })} type="email" autoComplete="off" defaultValue={data?.email}
                         className={`${errors.email && 'border-2 border-red-400 dark:border-red-600'} input bg-yellow-500 bg-opacity-20 dark:bg-gray-600`} />
                     {errors.email && <InputWarning />}
                 </div>

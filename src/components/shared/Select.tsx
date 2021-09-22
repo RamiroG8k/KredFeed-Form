@@ -3,8 +3,8 @@ import { CgArrowsExchangeAltV, CgCheck } from 'react-icons/cg';
 import { Listbox, Transition } from '@headlessui/react';
 
 const Select = (props: any) => {
-    const { grouped = false, data, onChange, buttonStyle, dropdownStyle, activeStyle, parentStyle } = props;
-    const [selected, setSelected] = useState();
+    const { grouped = false, data, onChange, defaultValue, buttonStyle, dropdownStyle, activeStyle, parentStyle } = props;
+    const [selected, setSelected] = useState(defaultValue ?? null);
 
     const handleChange = (value: any) => {
         onChange(value);

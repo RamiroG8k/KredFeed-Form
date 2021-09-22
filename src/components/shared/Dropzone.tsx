@@ -2,8 +2,7 @@ import { useDropzone } from 'react-dropzone';
 
 const Dropzone = (props: any) => {
     const { multiple = false, onChange, ...rest } = props;
-
-    const { getRootProps, getInputProps } = useDropzone({ multiple, ...rest })
+    const { getRootProps, getInputProps } = useDropzone({ multiple, ...rest });
 
     return (
         <section className="flex">

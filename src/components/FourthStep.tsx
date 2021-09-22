@@ -1,11 +1,20 @@
-import { InputWarning, Address } from 'components/shared';
+import { InputWarning, Address, Select } from 'components/shared';
+import { useEffect } from 'react';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import { Controller } from 'react-hook-form';
 
 const FirstStep = (props: any) => {
-    const { register, control, errors } = props;
+    const { register, control, errors, data, unregister } = props;
     // console.log(Object.values(errors).length);
+    const calendarContainer = (props: any) => {
+        const { children } = props;
+        return <div className="z-20">{children}</div>
+    };
+    
+    useEffect(() => {
+        unregister();
+    }, [unregister])
 
     return (
         <>
@@ -19,13 +28,13 @@ const FirstStep = (props: any) => {
             <div className="grid lg:grid-cols-2 gap-2 lg:gap-4">
                 <div className="flex flex-col relative">
                     <label htmlFor="banco" className="ml-2 mb-1">Banco</label>
-                    <input id="banco" {...register("banco", { required: true })} type="text" autoComplete="off"
+                    <input id="banco" {...register("banco", { required: true })} type="text" autoComplete="off" defaultValue={data?.banco}
                         className={`${errors.banco && 'border-2 border-red-400 dark:border-red-600'} input bg-yellow-500 bg-opacity-20 dark:bg-gray-600`} />
                     {errors.banco && <InputWarning />}
                 </div>
                 <div className="flex flex-col relative">
                     <label htmlFor="clabe" className="ml-2 mb-1">CLABE</label>
-                    <input id="clabe" {...register("clabe", { required: true, minLength: 18, maxLength: 18 })} type="text" autoComplete="off"
+                    <input id="clabe" {...register("clabe", { required: true, minLength: 18, maxLength: 18 })} type="text" autoComplete="off" defaultValue={data?.clabe}
                         className={`${errors.clabe && 'border-2 border-red-400 dark:border-red-600'} input bg-yellow-500 bg-opacity-20 dark:bg-gray-600`} />
                     {errors.clabe && <InputWarning text="Debe de estar formado por 18 digitos"/>}
                 </div>
@@ -33,50 +42,55 @@ const FirstStep = (props: any) => {
                     <h3 className="my-1 font-medium text-gray-700 text-2xl">Beneficiario</h3>
                     <div className="border" />
                 </div>
-                <div className="flex flex-col relative">
+                <div className="flex flex-col relative col-span-2">
                     <label htmlFor="beneficiario" className="ml-2 mb-1">Nombre</label>
-                    <input id="beneficiario" {...register("beneficiario", { required: true })} type="text" autoComplete="off"
+                    <input id="beneficiario" {...register("beneficiario", { required: true })} type="text" autoComplete="off" defaultValue={data?.beneficiario}
                         className={`${errors.beneficiario && 'border-2 border-red-400 dark:border-red-600'} input bg-yellow-500 bg-opacity-20 dark:bg-gray-600`} />
                     {errors.beneficiario && <InputWarning />}
                 </div>
                 <div className="flex flex-col relative">
-                    <label htmlFor="fechaNacimiento" className="ml-2 mb-1">Fecha de nacimiento</label>
-                    <Controller control={control} name="fechaNacimiento" defaultValue={null} rules={{ required: true }}
+                    <label htmlFor="fechaNacimientoBeneficiario" className="ml-2 mb-1">Fecha de nacimiento</label>
+                    <Controller control={control} name="fechaNacimientoBeneficiario" defaultValue={data?.fechaNacimientoBeneficiario} rules={{ required: true }}
                         render={({ field: { onChange, onBlur, value } }) => (
                             <DatePicker onChange={onChange} onBlur={onBlur} selected={value}
-                                dateFormat="dd, MMM yyyy" wrapperClassName="w-full" maxDate={new Date()}
-                                className={`${errors.fechaNacimiento && 'border-2 border-red-400 dark:border-red-600'} input bg-yellow-500 bg-opacity-20 dark:bg-gray-600`} />)} />
-                    {errors.fechaNacimiento && <InputWarning />}
+                                dateFormat="dd, MMM yyyy" wrapperClassName="w-full" maxDate={new Date()} popperPlacement="top" popperContainer={calendarContainer}
+                                className={`${errors.fechaNacimientoBeneficiario && 'border-2 border-red-400 dark:border-red-600'} input bg-yellow-500 bg-opacity-20 dark:bg-gray-600`} />)} />
+                    {errors.fechaNacimientoBeneficiario && <InputWarning />}
                 </div>
                 <div className="flex flex-col relative">
                     <label htmlFor="curp" className="ml-2 mb-1">CURP</label>
-                    <input id="curp" {...register("curp", { required: true, maxLength: 13 })} type="text" autoComplete="off"
+                    <input id="curp" {...register("curp", { required: true, maxLength: 13 })} type="text" autoComplete="off" defaultValue={data?.curp}
                         className={`${errors.curp && 'border-2 border-red-400 dark:border-red-600'} input uppercase bg-yellow-500 bg-opacity-20 dark:bg-gray-600`} />
                     {errors.curp && <InputWarning text="No debe ser mayor a 13 Caracteres" />}
                 </div>
                 <div className="flex flex-col relative">
-                    <label htmlFor="genero" className="ml-2 mb-1">Genero</label>
-                    <input id="genero" {...register("genero", { required: true })} type="text" autoComplete="off"
-                        className={`${errors.genero && 'border-2 border-red-400 dark:border-red-600'} input bg-yellow-500 bg-opacity-20 dark:bg-gray-600`} />
-                    {errors.genero && <InputWarning />}
+                    <label htmlFor="generoBeneficiario" className="ml-2 mb-1">Genero</label>
+                    <Controller control={control} name="generoBeneficiario" defaultValue={data?.generoBeneficiario} rules={{ required: true }}
+                        render={({ field: { onChange } }) => (
+                            <Select onChange={onChange} data={['Femenino', 'Masculino']} defaultValue={data?.generoBeneficiario}
+                                buttonStyle={`${errors.generoBeneficiario ? 'border-2 border-red-400 dark:border-red-600' : ''} input bg-yellow-500 bg-opacity-20 dark:bg-gray-600`}
+                                activeStyle="bg-yellow-100 dark:bg-gray-800"
+                                dropdownStyle="bg-white dark:bg-gray-700 dark:text-gray-500"
+                                parentStyle="z-10" />)} />
+                    {errors.generoBeneficiario && <InputWarning />}
                 </div>
                 <div className="flex flex-col relative">
-                    <label htmlFor="numero" className="ml-2 mb-1">Numero de telefono</label>
-                    <input id="numero" {...register("numero", { required: true })} type="text" autoComplete="off"
-                        className={`${errors.numero && 'border-2 border-red-400 dark:border-red-600'} input bg-yellow-500 bg-opacity-20 dark:bg-gray-600`} />
-                    {errors.numero && <InputWarning />}
+                    <label htmlFor="telefonoBeneficiario" className="ml-2 mb-1">Numero de telefono</label>
+                    <input id="telefonoBeneficiario" {...register("telefonoBeneficiario", { required: true })} type="text" autoComplete="off" defaultValue={data?.telefonoBeneficiario}
+                        className={`${errors.telefonoBeneficiario && 'border-2 border-red-400 dark:border-red-600'} input bg-yellow-500 bg-opacity-20 dark:bg-gray-600`} />
+                    {errors.telefonoBeneficiario && <InputWarning />}
                 </div>
-                <div className="flex flex-col relative">
-                    <label htmlFor="email" className="ml-2 mb-1">Correo electronico</label>
-                    <input id="email" {...register("email", { required: true })} type="text" autoComplete="off"
-                        className={`${errors.email && 'border-2 border-red-400 dark:border-red-600'} input bg-yellow-500 bg-opacity-20 dark:bg-gray-600`} />
-                    {errors.email && <InputWarning />}
+                <div className="flex flex-col relative col-span-2">
+                    <label htmlFor="emailBeneficiario" className="ml-2 mb-1">Correo electronico</label>
+                    <input id="emailBeneficiario" {...register("emailBeneficiario", { required: true })} type="emailBeneficiario" autoComplete="off" defaultValue={data?.emailBeneficiario}
+                        className={`${errors.emailBeneficiario && 'border-2 border-red-400 dark:border-red-600'} input bg-yellow-500 bg-opacity-20 dark:bg-gray-600`} />
+                    {errors.emailBeneficiario && <InputWarning />}
                 </div>
                 <div className="col-span-2 ml-2">
                     <h3 className="my-1 font-medium text-gray-700 text-2xl">Domicilio</h3>
                     <div className="border" />
                 </div>
-                <Address register={register} control={control} errors={errors} />
+                <Address data={data} register={register} control={control} errors={errors} noun="R" />
             </div>
         </>
     )
