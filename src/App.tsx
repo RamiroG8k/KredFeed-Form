@@ -12,6 +12,7 @@ function App() {
     const { register, control, handleSubmit, unregister, reset, formState, formState: { errors } } = useForm<FormData>();
 
     const onSubmit = (data: any) => {
+        scrollToTop();
         if (step <= 4) {
             const obj = step === 3 ? 'representanteLegal' : step === 4 ? 'beneficiario' : 'usuario';
             setFormData({ ...formData, [obj]: { ...formData[obj], ...data } });
@@ -19,9 +20,10 @@ function App() {
             setComplete(step === 4);
         }
     };
-
+    
     const stepHandler = (backwards?: boolean) => {
         backwards ? setStep(step - 1) : setStep(step + 1);
+        scrollToTop();
     };
 
     const stepRenderer = () => {
@@ -34,6 +36,13 @@ function App() {
             default: return <FirstStep data={formData?.usuario} {...props} />;
         }
     };
+
+    const scrollToTop = () => {
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth"
+        });
+    }
 
     const restart = () => {
         reset();

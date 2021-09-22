@@ -92,13 +92,13 @@ const FirstStep = (props: any) => {
                 </div>
                 <div className="flex flex-col relative col-span-2 sm:col-span-1">
                     <label htmlFor="curpRepresentante" className="ml-2 mb-1">CURP</label>
-                    <input id="curpRepresentante" {...register("curpRepresentante", { required: true, maxLength: 13 })} type="text" autoComplete="off" defaultValue={data?.curpRepresentante}
+                    <input id="curpRepresentante" {...register("curpRepresentante", { required: true, minLength: 18, maxLength: 18 })} min="18" max="18" type="text" autoComplete="off" defaultValue={data?.curpRepresentante}
                         className={`${errors.curpRepresentante && 'border-2 border-red-400 dark:border-red-600'} input uppercase bg-yellow-500 bg-opacity-20 dark:bg-gray-600`} />
-                    {errors.curpRepresentante && <InputWarning text="No debe ser mayor a 13 Caracteres" />}
+                    {errors.curpRepresentante && <InputWarning text="Se conforma por 18 caracteres" />}
                 </div>
                 <div className="flex flex-col relative col-span-2 sm:col-span-1">
                     <label htmlFor="rfcRepresentante" className="ml-2 mb-1">RFC</label>
-                    <input id="rfcRepresentante" {...register("rfcRepresentante", { required: true, maxLength: 13 })} type="text" autoComplete="off" defaultValue={data?.rfcRepresentante}
+                    <input id="rfcRepresentante" {...register("rfcRepresentante", { required: true, maxLength: 13, minLength: 12 })} type="text" autoComplete="off" defaultValue={data?.rfcRepresentante}
                         className={`${errors.rfcRepresentante && 'border-2 border-red-400 dark:border-red-600'} input uppercase bg-yellow-500 bg-opacity-20 dark:bg-gray-600`} />
                     {errors.rfcRepresentante && <InputWarning text="No debe ser mayor a 13 Caracteres" />}
                 </div>
@@ -121,7 +121,7 @@ const FirstStep = (props: any) => {
                 </div>
                 <div className="flex flex-col relative col-span-2 sm:col-span-1">
                     <label htmlFor="telefonoRepresentante" className="ml-2 mb-1">Telefono</label>
-                    <input id="telefonoRepresentante" {...register("telefonoRepresentante", { required: true })} type="tel" autoComplete="off" defaultValue={data?.telefonoRepresentante}
+                    <input id="telefonoRepresentante" {...register("telefonoRepresentante", { required: true, minLength: 10, maxLength: 14 })} min={10} type="number" autoComplete="off" defaultValue={data?.telefonoRepresentante}
                         className={`${errors.telefonoRepresentante && 'border-2 border-red-400 dark:border-red-600'} input bg-yellow-500 bg-opacity-20 dark:bg-gray-600`} />
                     {errors.telefonoRepresentante && <InputWarning />}
                 </div>

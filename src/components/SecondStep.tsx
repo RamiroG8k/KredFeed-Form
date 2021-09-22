@@ -48,9 +48,9 @@ const SecondStep = (props: any) => {
                 </div>
                 <div className="flex flex-col relative col-span-2 sm:col-span-1">
                     <label htmlFor="telefono" className="ml-2 mb-1">Numero telefonico</label>
-                    <input id="telefono" {...register("telefono", { required: true })} type="text" autoComplete="off" defaultValue={data?.telefono}
+                    <input id="telefono" {...register("telefono", { required: true, minLength: 10, maxLength: 14 })} min={10} type="number" autoComplete="off" defaultValue={data?.telefono}
                         className={`${errors.telefono && 'border-2 border-red-400 dark:border-red-600'} input bg-yellow-500 bg-opacity-20 dark:bg-gray-600`} />
-                    {errors.telefono && <InputWarning />}
+                    {errors.telefono && <InputWarning text="Debe contener por lo menos 10 digitos" />}
                 </div>
                 <div className="flex flex-col col-span-2 relative">
                     <label htmlFor="email" className="ml-2 mb-1">Correo electronico</label>

@@ -34,7 +34,7 @@ const FirstStep = (props: any) => {
                 </div>
                 <div className="flex flex-col relative">
                     <label htmlFor="clabe" className="ml-2 mb-1">CLABE</label>
-                    <input id="clabe" {...register("clabe", { required: true, minLength: 18, maxLength: 18 })} type="text" autoComplete="off" defaultValue={data?.clabe}
+                    <input id="clabe" {...register("clabe", { required: true, minLength: 18, maxLength: 18 })} type="number" autoComplete="off" defaultValue={data?.clabe}
                         className={`${errors.clabe && 'border-2 border-red-400 dark:border-red-600'} input bg-yellow-500 bg-opacity-20 dark:bg-gray-600`} />
                     {errors.clabe && <InputWarning text="Debe de estar formado por 18 digitos"/>}
                 </div>
@@ -59,9 +59,9 @@ const FirstStep = (props: any) => {
                 </div>
                 <div className="flex flex-col relative">
                     <label htmlFor="curp" className="ml-2 mb-1">CURP</label>
-                    <input id="curp" {...register("curp", { required: true, maxLength: 13 })} type="text" autoComplete="off" defaultValue={data?.curp}
+                    <input id="curp" {...register("curp", { required: true, minLength: 18, maxLength: 18 })} min="18" max="18" type="text" autoComplete="off" defaultValue={data?.curp}
                         className={`${errors.curp && 'border-2 border-red-400 dark:border-red-600'} input uppercase bg-yellow-500 bg-opacity-20 dark:bg-gray-600`} />
-                    {errors.curp && <InputWarning text="No debe ser mayor a 13 Caracteres" />}
+                    {errors.curp && <InputWarning text="Se conforma por 18 caracteres" />}
                 </div>
                 <div className="flex flex-col relative">
                     <label htmlFor="generoBeneficiario" className="ml-2 mb-1">Genero</label>
@@ -76,7 +76,7 @@ const FirstStep = (props: any) => {
                 </div>
                 <div className="flex flex-col relative">
                     <label htmlFor="telefonoBeneficiario" className="ml-2 mb-1">Numero de telefono</label>
-                    <input id="telefonoBeneficiario" {...register("telefonoBeneficiario", { required: true })} type="text" autoComplete="off" defaultValue={data?.telefonoBeneficiario}
+                    <input id="telefonoBeneficiario" {...register("telefonoBeneficiario", { required: true })} type="number" autoComplete="off" defaultValue={data?.telefonoBeneficiario}
                         className={`${errors.telefonoBeneficiario && 'border-2 border-red-400 dark:border-red-600'} input bg-yellow-500 bg-opacity-20 dark:bg-gray-600`} />
                     {errors.telefonoBeneficiario && <InputWarning />}
                 </div>

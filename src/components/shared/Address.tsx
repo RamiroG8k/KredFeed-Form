@@ -12,20 +12,20 @@ const Address = (props: any) => {
             </div>
             <div className="flex flex-col relative col-span-2 sm:col-span-1">
                 <label htmlFor={`numeroExt${noun}`} className="ml-2 mb-1">Numero Exterior</label>
-                <input id={`numeroExt${noun}`} {...register(`numeroExt${noun}`, { required: true })} type="text" autoComplete="off" defaultValue={data?.[`numeroExt${noun}`]}
+                <input id={`numeroExt${noun}`} {...register(`numeroExt${noun}`, { required: true, maxLength: 6 })} type="text" autoComplete="off" defaultValue={data?.[`numeroExt${noun}`]}
                     className={`${errors[`numeroExt${noun}`] && 'border-2 border-red-400 dark:border-red-600'} input bg-yellow-500 bg-opacity-20 dark:bg-gray-600`} />
-                {errors[`numeroExt${noun}`] && <InputWarning />}
+                {errors[`numeroExt${noun}`] && <InputWarning text="Puede contener hasta 6 caracteres" />}
             </div>
             <div className="flex flex-col relative col-span-2 sm:col-span-1">
                 <label htmlFor={`numeroInt${noun}`} className="ml-2 mb-1">Numero Interior</label>
-                <input id={`numeroInt${noun}`} {...register(`numeroInt${noun}`)} type="text" autoComplete="off" defaultValue={data?.[`numeroInt${noun}`]}
+                <input id={`numeroInt${noun}`} {...register(`numeroInt${noun}`, { maxLength: 6 } )} type="text" autoComplete="off" defaultValue={data?.[`numeroInt${noun}`]}
                     className="input bg-yellow-500 bg-opacity-20 dark:bg-gray-600" />
             </div>
             <div className="flex flex-col relative col-span-2 sm:col-span-1">
                 <label htmlFor={`cp${noun}`} className="ml-2 mb-1">Codigo postal</label>
                 <input id={`cp${noun}`} {...register(`cp${noun}`, { required: true, maxLength: 7 })} type="text" autoComplete="off" defaultValue={data?.[`cp${noun}`]}
                     className={`${errors[`cp${noun}`] && 'border-2 border-red-400 dark:border-red-600'} input bg-yellow-500 bg-opacity-20 dark:bg-gray-600`} />
-                {errors[`cp${noun}`] && <InputWarning />}
+                {errors[`cp${noun}`] && <InputWarning text="Puede contener hasta 7 caracteres"/>}
             </div>
             <div className="flex flex-col relative col-span-2 sm:col-span-1">
                 <label htmlFor={`colonia${noun}`} className="ml-2 mb-1">Colonia o Urbanizacion</label>
