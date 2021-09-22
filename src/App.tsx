@@ -28,7 +28,7 @@ function App() {
                 return <FirstStep register={register} errors={errors} control={control} />;
 
             case 2:
-                return <SecondStep comprobante={formData?.comprobanteDomicilio.name} register={register} errors={errors} control={control} />;
+                return <SecondStep comprobante={formData?.comprobanteDomicilio} register={register} errors={errors} control={control} />;
 
             case 3:
                 return <ThirdStep register={register} errors={errors} control={control} />;
@@ -48,12 +48,12 @@ function App() {
                     <ModeSwitcher />
                 </div>
             </div>
-            {/* <div className="z-10 absolute top-0 bg-yellow-500 bg-opacity-90 dark:bg-gray-800 w-full sm:w-1/2 sm:rounded-b-4xl p-4 sm:p-2">
+            <div className="z-10 absolute top-0 bg-yellow-500 bg-opacity-90 dark:bg-gray-800 w-full sm:w-1/2 sm:rounded-b-4xl p-4 sm:p-2">
                 <h1 className="text-4xl font-semibold text-center text-white">
                     Formulario KredFeed
                 </h1>
-            </div> */}
-            <div className="flex flex-col w-full sm:w-2/3 p-6 overflow-y-auto h-full justify-center">
+            </div>
+            <div className="flex flex-col w-full sm:w-2/3 overflow-y-auto h-full py-20 p-6">
                 <form id="form" onSubmit={handleSubmit(onSubmit)} className="my-6">
                     {stepRenderer()}
                 </form>

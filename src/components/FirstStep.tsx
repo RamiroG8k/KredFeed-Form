@@ -26,12 +26,18 @@ const selectData = [
 const FirstStep = (props: any) => {
     const { register, control, errors } = props;
 
+    const calendarContainer = (props: any) => {
+        const { children } = props;
+        return <div className="z-20">{children}</div>
+    };
+
     return (
         <>
             <div className="ml-2 my-4">
-                <h2 className="text-4xl font-medium text-gray-700 dark:text-gray-500 mb-2">
-                    Primer paso
+                <h2 className="text-4xl font-medium text-gray-700 dark:text-gray-500">
+                    Informacion General
                 </h2>
+                <p className="text-gray-400 mb-2">Completa correctamente los campos para continuar con el siguiente paso</p>
                 <div className="rounded-full border dark:border-gray-800 w-2/3" />
             </div>
             <div className="grid lg:grid-cols-2 gap-2 lg:gap-4">
@@ -48,33 +54,9 @@ const FirstStep = (props: any) => {
                     {errors.nombreComercial && <InputWarning />}
                 </div>
                 <div className="flex flex-col relative">
-                    <label htmlFor="nacionalidad" className="ml-2 mb-1">Nacionalidad</label>
-                    <input id="nacionalidad" {...register("nacionalidad", { required: true })} type="text" autoComplete="off"
-                        className={`${errors.nacionalidad && 'border-2 border-red-400 dark:border-red-600'} input bg-yellow-500 bg-opacity-20 dark:bg-gray-600`} />
-                    {errors.nacionalidad && <InputWarning />}
-                </div>
-                <div className="flex flex-col relative">
-                    <label htmlFor="fechaConstitucion" className="ml-2 mb-1">Fecha de Constitucion</label>
-                    <Controller control={control} name="fechaConstitucion" defaultValue={null} rules={{ required: true }}
-                        render={({ field: { onChange, onBlur, value } }) => (
-                            <DatePicker id="fechaConstitucion" onChange={onChange} onBlur={onBlur} selected={value}
-                                dateFormat="dd, MMM yyyy" wrapperClassName="w-full" maxDate={new Date()}
-                                className={`${errors.fechaConstitucion && 'border-2 border-red-400 dark:border-red-600'} input bg-yellow-500 bg-opacity-20 dark:bg-gray-600`} />)} />
-                    {errors.fechaConstitucion && <InputWarning />}
-                </div>
-                <div className="flex flex-col relative z-20">
-                    <label htmlFor="fechaInicioOperaciones" className="ml-2 mb-1">Fecha de Inicio de Operaciones</label>
-                    <Controller control={control} name="fechaInicioOperaciones" defaultValue={null} rules={{ required: true }}
-                        render={({ field: { onChange, onBlur, value } }) => (
-                            <DatePicker id="fechaInicioOperaciones" onChange={onChange} onBlur={onBlur} selected={value}
-                                dateFormat="dd, MMM yyyy" wrapperClassName="w-full" maxDate={new Date()}
-                                className={`${errors.fechaInicioOperaciones && 'border-2 border-red-400 dark:border-red-600'} input bg-yellow-500 bg-opacity-20 dark:bg-gray-600`} />)} />
-                    {errors.fechaInicioOperaciones && <InputWarning />}
-                </div>
-                <div className="flex flex-col relative">
                     <label htmlFor="rfc" className="ml-2 mb-1">RFC</label>
                     {/* TODO Evaluar correctamente */}
-                    <input id="rfc" {...register("rfc", { required: true, maxLength: 13, minLength: 10 })} type="text" autoComplete="off"
+                    <input id="rfc" {...register("rfc", { required: true, maxLength: 13, minLength: 12 })} type="text" autoComplete="off"
                         className={`${errors.rfc && 'border-2 border-red-400 dark:border-red-600'} input uppercase bg-yellow-500 bg-opacity-20 dark:bg-gray-600`} />
                     {errors.rfc && <InputWarning text="No debe ser mayor a 13 Caracteres" />}
                 </div>
@@ -90,10 +72,34 @@ const FirstStep = (props: any) => {
                     {errors.regimenFiscal && <InputWarning />}
                 </div>
                 <div className="flex flex-col relative">
+                    <label htmlFor="nacionalidad" className="ml-2 mb-1">Nacionalidad</label>
+                    <input id="nacionalidad" {...register("nacionalidad", { required: true })} type="text" autoComplete="off"
+                        className={`${errors.nacionalidad && 'border-2 border-red-400 dark:border-red-600'} input bg-yellow-500 bg-opacity-20 dark:bg-gray-600`} />
+                    {errors.nacionalidad && <InputWarning />}
+                </div>
+                <div className="flex flex-col relative">
                     <label htmlFor="industria" className="ml-2 mb-1">Industria</label>
                     <input id="industria" {...register("industria", { required: true })} type="text" autoComplete="off"
                         className={`${errors.industria && 'border-2 border-red-400 dark:border-red-600'} input bg-yellow-500 bg-opacity-20 dark:bg-gray-600`} />
                     {errors.industria && <InputWarning />}
+                </div>
+                <div className="flex flex-col relative">
+                    <label htmlFor="fechaConstitucion" className="ml-2 mb-1">Fecha de Constitucion</label>
+                    <Controller control={control} name="fechaConstitucion" defaultValue={null} rules={{ required: true }}
+                        render={({ field: { onChange, onBlur, value } }) => (
+                            <DatePicker id="fechaConstitucion" onChange={onChange} onBlur={onBlur} selected={value}
+                                dateFormat="dd, MMM yyyy" wrapperClassName="w-full" maxDate={new Date()} popperPlacement="top" popperContainer={calendarContainer}
+                                className={`${errors.fechaConstitucion && 'border-2 border-red-400 dark:border-red-600'} input bg-yellow-500 bg-opacity-20 dark:bg-gray-600`} />)} />
+                    {errors.fechaConstitucion && <InputWarning />}
+                </div>
+                <div className="flex flex-col relative">
+                    <label htmlFor="fechaInicioOperaciones" className="ml-2 mb-1">Fecha de Inicio de Operaciones</label>
+                    <Controller control={control} name="fechaInicioOperaciones" defaultValue={null} rules={{ required: true }}
+                        render={({ field: { onChange, onBlur, value } }) => (
+                            <DatePicker id="fechaInicioOperaciones" onChange={onChange} onBlur={onBlur} selected={value}
+                                dateFormat="dd, MMM yyyy" wrapperClassName="w-full" maxDate={new Date()} popperPlacement="top" popperContainer={calendarContainer}
+                                className={`${errors.fechaInicioOperaciones && 'border-2 border-red-400 dark:border-red-600'} input bg-yellow-500 bg-opacity-20 dark:bg-gray-600`} />)} />
+                    {errors.fechaInicioOperaciones && <InputWarning />}
                 </div>
             </div>
         </>

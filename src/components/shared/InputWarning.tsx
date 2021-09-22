@@ -2,7 +2,7 @@ import { TiWarningOutline } from 'react-icons/ti';
 
 const InputWarning = ({ text }: { text?: string }) => {
     return (
-        <div className="text-red-400 dark:text-red-500">
+        <div className="text-red-400">
             <p className="absolute text-2xl right-3 bottom-9">
                 <TiWarningOutline />
             </p>
